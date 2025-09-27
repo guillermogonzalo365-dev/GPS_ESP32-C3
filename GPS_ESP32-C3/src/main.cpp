@@ -15,7 +15,19 @@ GPS_SERIAL.begin(9600, SERIAL_8N1, 20, 21); // RX en GPIO3, TX en GPIO1 (TX no s
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  while (GPS_SERIAL.available() > 0) {
+    char c = GPS_SERIAL.read();
+    Serial.write(c); // Muestra la trama NMEA en el monitor serie
+    gps.encode(c);   // Procesa el dato con TinyGPSPlus
+  }
 
+  // Ejemplo: mostrar latitud y longitud si hay datos válidos
+  if (gps.location.isUpdated()) {
+    Serial.print("Latitud: ");
+    Serial.println(gps.location.lat(), 6);
+    Serial.print("Longitud: ");
+    Serial.println(gps.location.lng(), 6);
+    
+  }
 }
 
