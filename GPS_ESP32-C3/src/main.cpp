@@ -1,11 +1,12 @@
 #include <Arduino.h>
+#include <TinyGPSPlus.h>
 
-// put function declarations here:
-int myFunction(int, int);
+
+// IMPORTANTE: ESTE PROGRAMA SOLLO FUNCIONA EN EL ESP32-C3
 
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+
 }
 
 void loop() {
