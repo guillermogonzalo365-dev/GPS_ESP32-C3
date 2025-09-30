@@ -1,6 +1,8 @@
 // IMPORTANTE: ESTE PROGRAMA SOLO FUNCIONA EN EL ESP32-C3
 #include <Arduino.h>
+
 #include <TinyGPSPlus.h>
+#include <WiFi.h>
 #include <SoftwareSerial.h> //si necesitamos más uart
 
 
@@ -13,6 +15,12 @@ HardwareSerial GPS_SERIAL(0); // Usar UART0 para el GPS
 TinyGPSPlus gps;  
 
 void setup() {
+
+  // Apagar WiFi y Bluetooth para bajo consumo
+  WiFi.mode(WIFI_OFF);
+#ifdef CONFIG_BT_ENABLED
+  btStop();
+#endif
 
 ledcSetup(PWM_CHANNEL, PWM_FREQ, PWM_RES);
 ledcAttachPin(PWM_PIN, PWM_CHANNEL);
